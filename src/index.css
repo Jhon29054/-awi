@@ -1,0 +1,217 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 65px; /* Definir altura del header para sticky sidebar */
+
+    --background: 220 20% 97%; 
+    --foreground: 222.2 84% 4.9%; 
+    
+    --card: 0 0% 100%; 
+    --card-foreground: 222.2 84% 4.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    
+    --primary: 205 90% 45%; 
+    --primary-foreground: 0 0% 100%; 
+    
+    --secondary: 220 15% 94%; 
+    --secondary-foreground: 222.2 47.4% 11.2%; 
+    
+    --muted: 220 15% 94%;
+    --muted-foreground: 215 20% 55%; 
+    
+    --accent: 260 90% 65%; 
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 75% 55%; 
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 15% 88%; 
+    --input: 220 15% 88%;
+    --ring: 205 90% 50%; 
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 40% 10%; /* Azul noche profundo */
+    --foreground: 210 40% 96%; /* Blanco casi puro */
+
+    --card: 222 40% 14%; /* Azul oscuro sutilmente más claro que el fondo */
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 205 85% 58%; /* Azul Hostinger más vivo y brillante en dark */
+    --primary-foreground: 222.2 47.4% 11.2%; /* Para contraste sobre el azul brillante */
+
+    --secondary: 222 40% 18%; /* Gris azulado oscuro, con más carácter */
+    --secondary-foreground: 210 40% 90%; /* Blanco ligeramente apagado */
+
+    --muted: 222 40% 18%;
+    --muted-foreground: 215 25% 65%; /* Gris medio-claro */
+
+    --accent: 260 85% 70%; /* Violeta/magenta más luminoso */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 70% 60%; 
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 40% 22%; /* Borde sutil pero definido */
+    --input: 222 40% 22%;
+    --ring: 205 85% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+.glass-effect {
+  @apply bg-background/80 backdrop-blur-lg border-border/60 dark:bg-background/70 dark:border-border/50;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.pill {
+  @apply px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.pill-primary {
+  @apply bg-primary/10 text-primary dark:bg-primary/20;
+}
+
+.pill-warning {
+  @apply bg-yellow-400/10 text-yellow-600 dark:bg-yellow-400/20 dark:text-yellow-300;
+}
+
+.pill-danger {
+  @apply bg-destructive/10 text-destructive dark:bg-destructive/20;
+}
+
+.pill-success {
+  @apply bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-primary via-sky-500 to-indigo-600 bg-clip-text text-transparent dark:via-sky-400 dark:to-indigo-500;
+}
+.gradient-text-alt {
+  @apply bg-gradient-to-r from-accent via-purple-500 to-pink-500 bg-clip-text text-transparent dark:via-purple-400 dark:to-pink-400;
+}
+
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem; /* Ajustado para mejor espaciado */
+}
+
+@media (max-width: 768px) { /* Ajustado breakpoint */
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSlight 2s infinite;
+}
+
+@keyframes pulseSlight {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.welcome-bg-gradient {
+  background-image: linear-gradient(135deg, theme('colors.sky.100') 0%, theme('colors.indigo.50') 50%, theme('colors.purple.100') 100%);
+}
+.dark .welcome-bg-gradient {
+   background-image: linear-gradient(135deg, theme('colors.slate.900') 0%, theme('colors.indigo.950') 50%, theme('colors.purple.950') 100%);
+}
+
+.auth-form-icon-gradient {
+  @apply p-3 bg-gradient-to-br from-primary to-blue-600 rounded-full text-white inline-block shadow-lg;
+}
+
+.admin-stat-card {
+  @apply bg-card dark:bg-card rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out border border-border/50 hover:border-primary/50;
+}
+
+.admin-table-header {
+  @apply bg-muted/50 dark:bg-muted/30 text-foreground/80 dark:text-foreground/70 font-semibold uppercase tracking-wider text-xs;
+}
+
+.admin-tabs-trigger {
+  @apply py-3.5 px-5 text-sm font-semibold data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-primary/10 dark:data-[state=active]:bg-primary/20 rounded-t-md transition-all duration-200 ease-in-out hover:bg-muted/70 dark:hover:bg-muted/50;
+}
+
+button.xs {
+    @apply h-7 px-2 text-xs rounded-sm;
+}
+
+/* Refinamientos para un look más profesional */
+body {
+  font-family: 'Inter', sans-serif; /* Considerar añadir Inter o una fuente similar via import si no está por defecto */
+}
+
+@supports (font-variation-settings: normal) {
+  body { font-family: 'Inter var', sans-serif; }
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+}
+.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2), 0 10px 10px -5px rgba(0,0,0,0.1); /* Sombra más sutil en dark */
+}
+
+input, select, textarea {
+  @apply rounded-md border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:border-primary/50 focus:border-primary;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.dark input, .dark select, .dark textarea {
+   @apply hover:border-primary/70 focus:border-primary;
+}
